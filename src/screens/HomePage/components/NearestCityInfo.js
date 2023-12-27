@@ -127,7 +127,7 @@ const NearestCityInfoImpl = () => {
 
       <TableDetail>
         <TableThread>
-          <tr style={{ height: '48px' }}>
+          <tr style={{ height: '48px', color: 'blue' }}>
             <TableContent>Mức ô nhiễm không khí</TableContent>
             <TableContent>Chỉ số chất lượng không khí</TableContent>
             <TableContent>Chất gây ô nhiễm chính</TableContent>
@@ -173,10 +173,10 @@ const NearestCityInfoImpl = () => {
             <TableWeatherTd >Gió</TableWeatherTd>
             <TableWeatherTd style={{ fontWeight: 600, borderRadius: '0 0.625rem  0.625rem 0' }}>{nearestCity?.current?.weather?.ws} km/h</TableWeatherTd>
           </TableWeatherTr>
-          <TableWeatherTr style={{ background: '#BED6E3' }}>
+          {/* <TableWeatherTr style={{ background: '#BED6E3' }}>
             <TableWeatherTd >Áp suất</TableWeatherTd>
             <TableWeatherTd style={{ fontWeight: 600, borderRadius: '0 0.625rem  0.625rem 0' }}>{nearestCity?.current?.weather?.pr} mb</TableWeatherTd>
-          </TableWeatherTr>
+          </TableWeatherTr> */}
         </tbody>
       </TableDetail>
     </div>
