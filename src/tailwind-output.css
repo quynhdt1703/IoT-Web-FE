@@ -266,7 +266,8 @@ input::placeholder {
 Set the default cursor for buttons.
 */
 
-button {
+button,
+[role="button"] {
   cursor: pointer;
 }
 
