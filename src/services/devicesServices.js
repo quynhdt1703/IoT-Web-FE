@@ -1,82 +1,101 @@
-import { deleteAsyncWithToken, getAsync, getAsyncWithToken, postAsyncWithToken, putAsyncWithToken } from "../constant/request";
+import {
+  deleteAsyncWithToken,
+  getAsync,
+  getAsyncWithToken,
+  postAsyncWithToken,
+  putAsyncWithToken,
+} from "../constant/request";
 
-function getCookie(name = 'userid') {
-  const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+function getCookie(name = "userid") {
+  const v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
   return v ? v[2] : null;
 }
 
-function getCookieUser(name = 'currentuser') {
-  const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+function getCookieUser(name = "currentuser") {
+  const v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
   return v ? v[2] : null;
 }
 
 export async function getUserDevices() {
-  const url = process.env.REACT_APP_BACK_END + '/users/' + getCookie()
-  const response = await getAsyncWithToken(url)
-  return response?.data || []
+  const url = process.env.REACT_APP_BACK_END + "/users/" + getCookie();
+  const response = await getAsyncWithToken(url);
+  return response?.data || [];
 }
 
 export async function deleteDeviceById(deviceId) {
-  const url = process.env.REACT_APP_BACK_END + '/devices/' + deviceId
-  const response = await deleteAsyncWithToken(url)
-  return response?.data || []
+  const url = process.env.REACT_APP_BACK_END + "/devices/" + deviceId;
+  const response = await deleteAsyncWithToken(url);
+  return response?.data || [];
 }
 export async function updateDeviceById(deviceId, params = {}) {
-  const url = process.env.REACT_APP_BACK_END + '/devices/' + deviceId
-  const response = await putAsyncWithToken(url, params)
-  return response?.data || []
+  const url = process.env.REACT_APP_BACK_END + "/devices/" + deviceId;
+  const response = await putAsyncWithToken(url, params);
+  return response?.data || [];
 }
 export async function getDeviceById(deviceId) {
-  const url = process.env.REACT_APP_BACK_END + '/devices/' + deviceId
-  const response = await getAsyncWithToken(url)
-  return response?.data || []
+  const url = process.env.REACT_APP_BACK_END + "/devices/" + deviceId;
+  const response = await getAsyncWithToken(url);
+  return response?.data || [];
 }
 
 export async function updateDeviceByIdFetch(deviceId, params = {}) {
-  const url = process.env.REACT_APP_BACK_END + '/devices/' + deviceId
+  const url = process.env.REACT_APP_BACK_END + "/devices/" + deviceId;
   await fetch(url, {
-    method: 'PUT',
-    cache: 'no-cache',
+    method: "PUT",
+    cache: "no-cache",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + getCookieUser(),
-      'Accept': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookieUser(),
+      Accept: "application/json",
     },
-    body: JSON.stringify(params)
-  },
-  ).then(data => { return data?.data || [] })
-    .catch(err => console.log(`err`, err))
+    body: JSON.stringify(params),
+  })
+    .then((data) => {
+      return data?.data || [];
+    })
+    .catch((err) => console.log(`err`, err));
   // const response = await putAsyncWithToken(url, params)
   // console.log(`response`, response, params)
-
 }
 
 export async function addDeviceById(param) {
-  const url = process.env.REACT_APP_BACK_END + '/users/' + getCookie() + '/devices'
-  const response = await postAsyncWithToken(url, param)
-  return response?.data || []
+  const url =
+    process.env.REACT_APP_BACK_END + "/users/" + getCookie() + "/devices";
+  const response = await postAsyncWithToken(url, param);
+  return response?.data || [];
 }
 
 export async function addDeviceByIdFetch(params = {}) {
-  const url = process.env.REACT_APP_BACK_END + '/users/' + getCookie() + '/devices'
+  const url =
+    process.env.REACT_APP_BACK_END + "/users/" + getCookie() + "/devices";
   await fetch(url, {
-    method: 'POST',
-    cache: 'no-cache',
+    method: "POST",
+    cache: "no-cache",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + getCookieUser(),
-      'Accept': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookieUser(),
+      Accept: "application/json",
     },
-    body: JSON.stringify(params)
-  },
-  ).then(data => { return data?.data || [] })
-    .catch(err => console.log(`err`, err))
+    body: JSON.stringify(params),
+  })
+    .then((data) => {
+      return data?.data || [];
+    })
+    .catch((err) => console.log(`err`, err));
   // const response = await putAsyncWithToken(url, params)
   // console.log(`response`, response, params)
-
 }
 export async function getPublicDevices() {
-  let url = process.env.REACT_APP_BACK_END + '/devices/publicDevices'
-  const response = await getAsync(url)
-  return response?.data || []
+  let url = process.env.REACT_APP_BACK_END + "/devices/publicDevices";
+  const response = await getAsync(url);
+  return response?.data || [];
+}
+
+export async function getWeather() {
+  let api_key = "3f1b8c0cba596715e5974dbd2828ebbc";
+  let city = "Hanoi";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_key}`;
+  const response = await getAsync(url);
+
+  return response?.data || [];
 }
